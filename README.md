@@ -1,4 +1,4 @@
-# dating-bot, aka Bumble Bot System
+# Bumble Bot System
 
 A comprehensive automation system for Bumble dating app with a Python backend and Chrome extension frontend.
 
