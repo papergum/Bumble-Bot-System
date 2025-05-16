@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bumble Bot Settings</title>
+  <link rel="stylesheet" href="../css/options.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Bumble Bot Settings</h1>
+      <div id="connection-status" class="status-indicator">
+        <span class="status-dot"></span>
+        <span class="status-text">Disconnected</span>
+      </div>
+    </header>
+
+    <!-- Login Form (shown when not authenticated) -->
+    <div id="login-section" class="section hidden">
+      <h2>Login</h2>
+      <form id="login-form">
+        <div class="form-group">
+          <label for="api-url">API URL</label>
+          <input type="text" id="api-url" placeholder="https://your-api-url.com" required>
+        </div>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" placeholder="Username" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Password" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+      </form>
+      <div id="login-error" class="error-message hidden"></div>
+    </div>
+
+    <!-- Main Settings (shown when authenticated) -->
+    <div id="settings-section" class="section hidden">
+      <div class="tabs">
+        <button class="tab-button active" data-tab="swiping">Swiping</button>
+        <button class="tab-button" data-tab="messaging">Messaging</button>
+        <button class="tab-button" data-tab="filters">Filters</button>
+        <button class="tab-button" data-tab="account">Account</button>
+      </div>
+
+      <!-- Swiping Settings Tab -->
+      <div id="swiping-tab" class="tab-content active">
+        <h2>Swiping Settings</h2>
+        
+        <form id="swiping-form">
+          <div class="form-group">
+            <label for="swipe-mode">Swipe Mode</label>
+            <select id="swipe-mode" class="form-control">
+              <option value="auto">Automatic</option>
+              <option value="selective">Selective</option>
+              <option value="manual">Manual</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="swipe-rate">Swipe Rate (swipes per hour)</label>
+            <input type="range" id="swipe-rate" min="10" max="100" step="5" value="30">
+            <div class="range-value"><span id="swipe-rate-value">30</span> swipes/hour</div>
+          </div>
+          
+          <div class="form-group">
+            <label for="like-ratio">Like Ratio (%)</label>
+            <input type="range" id="like-ratio" min="0" max="100" step="5" value="70">
+            <div class="range-value"><span id="like-ratio-value">70</span>%</div>
+          </div>
+          
+          <div class="form-group">
+            <label>Swiping Schedule</label>
+            <div class="schedule-grid">
+              <div class="schedule-day">
+                <label><input type="checkbox" name="schedule-day" value="mon" checked> Mon</label>
+              </div>
+              <div class="schedule-day">
+                <label><input type="checkbox" name="schedule-day" value="tue" checked> Tue</label>
+              </div>
+              <div class="schedule-day">
+                <label><input type="checkbox" name="schedule-day" value="wed" checked> Wed</label>
+              </div>
+              <div class="schedule-day">
+                <label><input type="checkbox" name="schedule-day" value="thu" checked> Thu</label>
+              </div>
+              <div class="schedule-day">
+                <label><input type="checkbox" name="schedule-day" value="fri" checked> Fri</label>
+              </div>
+              <div class="schedule-day">
+                <label><input type="checkbox" name="schedule-day" value="sat" checked> Sat</label>
+              </div>
+              <div class="schedule-day">
+                <label><input type="checkbox" name="schedule-day" value="sun" checked> Sun</label>
+              </div>
+            </div>
+            
+            <div class="time-range">
+              <div class="time-input">
+                <label for="start-time">Start Time</label>
+                <input type="time" id="start-time" value="09:00">
+              </div>
+              <div class="time-input">
+                <label for="end-time">End Time</label>
+                <input type="time" id="end-time" value="22:00">
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label>Profile Preferences</label>
+            <div class="checkbox-group">
+              <label><input type="checkbox" id="prefer-verified" checked> Prefer verified profiles</label>
+            </div>
+            <div class="checkbox-group">
+              <label><input type="checkbox" id="prefer-with-bio" checked> Prefer profiles with bio</label>
+            </div>
+            <div class="checkbox-group">
+              <label><input type="checkbox" id="prefer-with-interests" checked> Prefer profiles with interests</label>
+            </div>
+          </div>
+          
+          <button type="submit" class="btn btn-primary">Save Swiping Settings</button>
+        </form>
+      </div>
+
+      <!-- Messaging Settings Tab -->
+      <div id="messaging-tab" class="tab-content">
+        <h2>Messaging Settings</h2>
+        
+        <form id="messaging-form">
+          <div class="form-group">
+            <label for="auto-reply">Auto Reply</label>
+            <select id="auto-reply" class="form-control">
+              <option value="disabled">Disabled</option>
+              <option value="selective">Selective</option>
+              <option value="all">All Messages</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="reply-delay">Reply Delay (minutes)</label>
+            <input type="range" id="reply-delay" min="1" max="60" step="1" value="5">
+            <div class="range-value"><span id="reply-delay-value">5</span> minutes</div>
+          </div>
+          
+          <div class="form-group">
+            <label for="opening-messages">Opening Messages</label>
+            <div class="message-templates">
+              <div class="message-template">
+                <textarea placeholder="Enter an opening message template..."></textarea>
+                <button type="button" class="btn btn-icon remove-template">×</button>
+              </div>
+              <button type="button" class="btn btn-secondary add-template">+ Add Template</button>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="follow-up-messages">Follow-up Messages</label>
+            <div class="message-templates">
+              <div class="message-template">
+                <textarea placeholder="Enter a follow-up message template..."></textarea>
+                <button type="button" class="btn btn-icon remove-template">×</button>
+              </div>
+              <button type="button" class="btn btn-secondary add-template">+ Add Template</button>
+            </div>
+          </div>
+          
+          <button type="submit" class="btn btn-primary">Save Messaging Settings</button>
+        </form>
+      </div>
+
+      <!-- Filters Settings Tab -->
+      <div id="filters-tab" class="tab-content">
+        <h2>Timewaster Filters</h2>
+        
+        <form id="filters-form">
+          <div class="form-group">
+            <label for="filter-mode">Filter Mode</label>
+            <select id="filter-mode" class="form-control">
+              <option value="disabled">Disabled</option>
+              <option value="flag">Flag Only</option>
+              <option value="auto">Auto Filter</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label>Filter Criteria</label>
+            <div class="checkbox-group">
+              <label><input type="checkbox" id="filter-one-word" checked> One-word responses</label>
+            </div>
+            <div class="checkbox-group">
+              <label><input type="checkbox" id="filter-no-questions" checked> No questions asked</label>
+            </div>
+            <div class="checkbox-group">
+              <label><input type="checkbox" id="filter-response-time" checked> Slow response time</label>
+              <div class="sub-option">
+                <label for="slow-response-hours">Threshold (hours)</label>
+                <input type="number" id="slow-response-hours" min="1" max="72" value="24">
+              </div>
+            </div>
+            <div class="checkbox-group">
+              <label><input type="checkbox" id="filter-keywords"> Contains keywords</label>
+              <div class="sub-option">
+                <input type="text" id="filter-keywords-list" placeholder="Enter keywords separated by commas">
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label>Actions for Filtered Matches</label>
+            <div class="checkbox-group">
+              <label><input type="checkbox" id="action-flag" checked> Flag in interface</label>
+            </div>
+            <div class="checkbox-group">
+              <label><input type="checkbox" id="action-deprioritize" checked> Deprioritize responses</label>
+            </div>
+            <div class="checkbox-group">
+              <label><input type="checkbox" id="action-unmatch"> Automatically unmatch</label>
+            </div>
+          </div>
+          
+          <button type="submit" class="btn btn-primary">Save Filter Settings</button>
+        </form>
+      </div>
+
+      <!-- Account Settings Tab -->
+      <div id="account-tab" class="tab-content">
+        <h2>Account Settings</h2>
+        
+        <form id="account-form">
+          <div class="form-group">
+            <label for="api-url-settings">API URL</label>
+            <input type="text" id="api-url-settings" placeholder="https://your-api-url.com">
+          </div>
+          
+          <div class="form-group">
+            <label for="notification-mode">Notifications</label>
+            <select id="notification-mode" class="form-control">
+              <option value="all">All Events</option>
+              <option value="important">Important Only</option>
+              <option value="none">Disabled</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label>Data Management</label>
+            <button type="button" id="export-data" class="btn btn-secondary">Export Data</button>
+            <button type="button" id="clear-data" class="btn btn-danger">Clear Local Data</button>
+          </div>
+          
+          <button type="submit" class="btn btn-primary">Save Account Settings</button>
+        </form>
+        
+        <div class="logout-section">
+          <button id="logout-button" class="btn btn-danger">Logout</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="stats-section" class="section hidden">
+      <h2>Bot Statistics</h2>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-title">Total Swipes</div>
+          <div class="stat-value" id="total-swipes">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-title">Matches</div>
+          <div class="stat-value" id="total-matches">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-title">Conversations</div>
+          <div class="stat-value" id="total-conversations">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-title">Response Rate</div>
+          <div class="stat-value" id="response-rate">0%</div>
+        </div>
+      </div>
+      
+      <div class="chart-container">
+        <canvas id="activity-chart"></canvas>
+      </div>
+    </div>
+
+    <footer>
+      <span>Bumble Bot v1.0.0</span>
+      <a href="#" id="view-docs">Documentation</a>
+    </footer>
+  </div>
+
+  <script src="../js/api.js"></script>
+  <script src="../js/options.js"></script>
+</body>
+</html>

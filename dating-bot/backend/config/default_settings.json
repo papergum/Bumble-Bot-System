@@ -1,0 +1,44 @@
+{
+  "bot": {
+    "headless": true,
+    "profile_path": null,
+    "auto_login": false
+  },
+  "swiping": {
+    "default_count": 50,
+    "default_like_ratio": 0.7,
+    "default_delay": 2,
+    "max_swipes_per_day": 100
+  },
+  "message_filter": {
+    "min_message_length": 5,
+    "max_response_time": 86400,
+    "min_engagement_score": 0.5,
+    "min_question_ratio": 0.2,
+    "max_one_word_ratio": 0.5,
+    "red_flag_patterns": [
+      "(?i)instagram",
+      "(?i)snapchat",
+      "(?i)follow me",
+      "(?i)my profile",
+      "(?i)venmo",
+      "(?i)cashapp",
+      "(?i)paypal",
+      "(?i)send money",
+      "(?i)not here often",
+      "(?i)check my bio"
+    ]
+  },
+  "message_analyzer": {
+    "filler_words": [
+      "um", "uh", "like", "so", "yeah", "just", "lol", "haha", "ok", "okay"
+    ],
+    "engagement_indicators": [
+      "\\?",
+      "(?i)what do you think",
+      "(?i)tell me more",
+      "(?i)how about you",
+      "(?i)that\\'s interesting"
+    ]
+  }
+}

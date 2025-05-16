@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bumble Bot</title>
+  <link rel="stylesheet" href="../css/popup.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Bumble Bot</h1>
+      <div id="connection-status" class="status-indicator">
+        <span class="status-dot"></span>
+        <span class="status-text">Disconnected</span>
+      </div>
+    </header>
+
+    <!-- Login Form (shown when not authenticated) -->
+    <div id="login-section" class="section hidden">
+      <h2>Login</h2>
+      <form id="login-form">
+        <div class="form-group">
+          <label for="api-url">API URL</label>
+          <input type="text" id="api-url" placeholder="https://your-api-url.com" required>
+        </div>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" placeholder="Username" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Password" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+      </form>
+      <div id="login-error" class="error-message hidden"></div>
+    </div>
+
+    <!-- Main Controls (shown when authenticated) -->
+    <div id="controls-section" class="section hidden">
+      <div class="status-panel">
+        <h2>Bot Status</h2>
+        <div class="status-row">
+          <span>Status:</span>
+          <span id="bot-status" class="status-value">Inactive</span>
+        </div>
+        <div class="status-row">
+          <span>Last Activity:</span>
+          <span id="last-activity" class="status-value">Never</span>
+        </div>
+        <div class="status-row">
+          <span>Matches:</span>
+          <span id="match-count" class="status-value">0</span>
+        </div>
+        <div class="status-row">
+          <span>Messages:</span>
+          <span id="message-count" class="status-value">0</span>
+        </div>
+      </div>
+
+      <div class="control-buttons">
+        <button id="start-button" class="btn btn-success">Start Swiping</button>
+        <button id="stop-button" class="btn btn-danger">Stop Swiping</button>
+        <button id="open-options" class="btn btn-secondary">Settings</button>
+      </div>
+
+      <div class="quick-stats">
+        <h3>Quick Stats</h3>
+        <div id="stats-container">
+          <div class="stat-item">
+            <span class="stat-label">Swipe Rate:</span>
+            <span id="swipe-rate" class="stat-value">0/hr</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Match Rate:</span>
+            <span id="match-rate" class="stat-value">0%</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Response Rate:</span>
+            <span id="response-rate" class="stat-value">0%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div id="activity-section" class="section hidden">
+      <h3>Recent Activity</h3>
+      <div id="activity-list" class="activity-list">
+        <div class="empty-state">No recent activity</div>
+      </div>
+    </div>
+
+    <footer>
+      <button id="logout-button" class="btn btn-text hidden">Logout</button>
+      <span class="version">v1.0.0</span>
+    </footer>
+  </div>
+
+  <script src="../js/api.js"></script>
+  <script src="../js/popup.js"></script>
+</body>
+</html>
